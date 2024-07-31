@@ -33,7 +33,9 @@ namespace CollegeManagementSystem
             }
 
             String dob = txtDOB.Text;
-            Int64 mobile = Int64.Parse(txtMobile.Text);
+            
+            Int64 mobile = 0;
+            bool isMobileValid = Int64.TryParse(txtMobile.Text, out mobile);
             String email = txtEmail.Text;
             String joinDate = txtJoinDate.Text;
             String dept = txtDept.Text;
@@ -41,8 +43,12 @@ namespace CollegeManagementSystem
             String add = txtAddress.Text;
 
             // create Sql connection
+            if(gender != "" && dob != "" && email != "" && isMobileValid && mobile != 0 && joinDate != "" && dept != "" && program != "" && add != "")
+            {
+
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+            //con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             // insert query
@@ -53,6 +59,11 @@ namespace CollegeManagementSystem
             da.Fill(ds);
 
             MessageBox.Show("Data Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please Enter all Required Information", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)

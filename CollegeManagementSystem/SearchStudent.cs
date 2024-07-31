@@ -24,7 +24,7 @@ namespace CollegeManagementSystem
         {
             // create Sql connection
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
 
@@ -40,8 +40,11 @@ namespace CollegeManagementSystem
         // search button
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            if(txtRegId.Text != "")
+            {
+
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
 
@@ -52,6 +55,11 @@ namespace CollegeManagementSystem
             da.Fill(ds);
 
             dataGridView1.DataSource = ds.Tables[0];
+            }
+            else
+            {
+                MessageBox.Show("Please Enter Registration ID to Search", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

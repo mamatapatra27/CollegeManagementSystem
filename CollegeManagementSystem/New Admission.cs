@@ -39,7 +39,8 @@ namespace CollegeManagementSystem
             }
 
             String dob = txtDOB.Text;
-            Int64 mobile = Int64.Parse(txtMobile.Text);
+            Int64 mobile = 0;
+            bool isMobileValid = Int64.TryParse(txtMobile.Text, out mobile);
             String email = txtEmail.Text;
             String semester = txtSemester.Text;
             String program = txtProgramming.Text;
@@ -48,8 +49,11 @@ namespace CollegeManagementSystem
             String add = txtAddress.Text;
 
             // create Sql connection
+            if(name != "" && mname != "" && gender != "" && dob != "" && isMobileValid && mobile != 0 && email != "" && semester != "" && program != "" && sname != "" && duration != "" && add != "")
+            {
+
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             // insert query
@@ -60,6 +64,11 @@ namespace CollegeManagementSystem
             da.Fill(ds);
             con.Close();
             MessageBox.Show("Data Saved, Remember the Registration ID", "Data", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+            else
+            {
+                MessageBox.Show("Please Enter all Required Information", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
 
@@ -85,7 +94,7 @@ namespace CollegeManagementSystem
         {
             // create Sql connection
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
 

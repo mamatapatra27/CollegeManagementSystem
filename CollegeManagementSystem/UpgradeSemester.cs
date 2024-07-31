@@ -21,11 +21,14 @@ namespace CollegeManagementSystem
         // Upgrade Button Click
         private void btnUpgrade_Click(object sender, EventArgs e)
         {
+            if(comboBoxFrom.SelectedIndex > 0 && comboBoxTo.SelectedIndex > 0)
+            {
             if(MessageBox.Show("Semester Update Warning !", "Confirm?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
+
                 // create Sql connection
                 SqlConnection con = new SqlConnection();
-                con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+                con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
 
@@ -41,6 +44,11 @@ namespace CollegeManagementSystem
             else
             {
                 MessageBox.Show("Upgrade Cancelled", "Cancle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            }
+            else
+            {
+                MessageBox.Show("Please Select Semester to Upgrade", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

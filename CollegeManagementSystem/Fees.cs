@@ -24,7 +24,7 @@ namespace CollegeManagementSystem
             {
                 // create Sql connection
                 SqlConnection con = new SqlConnection();
-                con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+                con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
 
@@ -61,9 +61,11 @@ namespace CollegeManagementSystem
         // Submit Button
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-           
+            if(txtFees.Text != "")
+            {
+
             SqlConnection con = new SqlConnection();
-            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             // query for select the fees of given id
@@ -77,7 +79,7 @@ namespace CollegeManagementSystem
             {
                 // create Sql connection
                 SqlConnection con1 = new SqlConnection();
-                con1.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\MAMATA PATRA\source\repos\CollegeManagementSystem\CollegeManagementSystem\Database.mdf;Integrated Security=True";
+                con1.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Database.mdf;Integrated Security=True; Connect Timeout=60";
                 SqlCommand cmd1 = new SqlCommand();
                 cmd1.Connection = con1;
 
@@ -104,6 +106,11 @@ namespace CollegeManagementSystem
                 lblFullName.Text = "-----------";
                 lblMotherName.Text = "-----------";
                 lblDuration.Text = "-----------";
+            }
+            }
+            else
+            {
+                MessageBox.Show("Please Enter Fees", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

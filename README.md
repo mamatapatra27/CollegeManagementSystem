@@ -1,4 +1,3 @@
-# CollegeManagementSystem"# College-Management-System" 
-"# CollegeManagementSystem" 
-"# CollegeManagementSystem" 
-"# CollegeManagementSystem" 
+# College Management System Using Asp.Net Web Forms
+Use Username & Password = "student"
+
